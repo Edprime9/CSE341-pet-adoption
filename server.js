@@ -9,7 +9,7 @@ const cors = require('cors');
 const session = require('express-session');
 
 //Modular settings
-const { connectDB } = require('./models/db/db');
+const { connectDB } = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
