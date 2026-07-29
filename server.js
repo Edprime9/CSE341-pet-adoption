@@ -9,7 +9,7 @@ const cors = require('cors');
 const session = require('express-session');
 
 //Modular settings
-const { connectDB } = require('./config/db');
+const { connectDB } = require('./models/db/db');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -27,7 +27,7 @@ async function startServer() {
     try {
         await connectDB();//wait for db to connect sucessfully
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`Server is running on port: https://localhost:${PORT}`);
         });
     } catch (error) {
         console.log("Failed to connect to the database");
