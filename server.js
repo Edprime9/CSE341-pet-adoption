@@ -18,7 +18,7 @@ app.get('/', (req,res) => {
     res.status(200).json({
         status: "Success",
         message: "Welcome to the Pet Adoption API!",
-        documentation: "Use http://localhost:8080/api-docs to access the documentation for this API." 
+        documentation: "Use http://localhost:8080/api-docs to access the documentation for this API.(not done yet, wait for confirmation from repo owner)" 
     })
 });
 
