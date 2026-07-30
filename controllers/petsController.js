@@ -7,7 +7,7 @@ Flow:
 - Delete a pet by ID from the database
  */
 const { mongo } = require('mongoose');
-const petsModel = require('../models/db/db');
+const petsModel = require('../config/db');
 const _id = require('mongodb').ObjectId;
 
 
