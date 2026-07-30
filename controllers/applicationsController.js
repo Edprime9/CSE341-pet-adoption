@@ -38,13 +38,13 @@ const applicationsController = {
 
     postNewApplication: async (req, res) => {
         try {
-            const { adopter_id, pet_id, shelter_id, status, application_date, notes } = req.body;
+            const { adopter_id, pet_id, shelter_id, status, submission_date, notes } = req.body;
             const newApp = await applicationsModel.getCollection('applications').insertOne({
                 adopter_id: new _id(adopter_id),
                 pet_id: new _id(pet_id),
                 shelter_id: new _id(shelter_id),
                 status,
-                application_date: new Date(application_date),
+                submission_date: new Date(submission_date),
                 notes
             });
             res.status(201).json({ message: 'New application submitted successfully', applicationId: newApp.insertedId });
@@ -59,14 +59,14 @@ const applicationsController = {
 
     editApplication: async (req, res) => {
         try {
-            const { adopter_id, pet_id, shelter_id, status, application_date, notes } = req.body;
+            const { adopter_id, pet_id, shelter_id, status, submission_date, notes } = req.body;
             
             const updateFields = {};
             if (adopter_id) updateFields.adopter_id = new _id(adopter_id);
             if (pet_id) updateFields.pet_id = new _id(pet_id);
             if (shelter_id) updateFields.shelter_id = new _id(shelter_id);
             if (status) updateFields.status = status;
-            if (application_date) updateFields.application_date = new Date(application_date);
+            if (submission_date) updateFields.submission_date = new Date(submission_date);
             if (notes) updateFields.notes = notes;
 
             const editApp = await applicationsModel.getCollection('applications').updateOne(
