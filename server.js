@@ -7,6 +7,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const routers = require('./routes/pets');
 
 //Modular settings
 const { connectDB } = require('./config/db');
@@ -34,12 +35,11 @@ async function startServer() {
     try {
         await connectDB();//wait for db to connect sucessfully
         app.listen(PORT, () => {
-            console.log(`Server is running on port: https://localhost:${PORT}`);
+            console.log(`Server is running on port: http://localhost:${PORT}`);
         });
     } catch (error) {
         console.log("Failed to connect to the database");
     }
 };
-
 
 startServer();
