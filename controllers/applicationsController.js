@@ -6,7 +6,7 @@ Flow:
 - Edit an application by ID in the database
 - Delete an application by ID from the database
  */
-const applicationsModel = require('../models/db/db');
+const applicationsModel = require('../config/db');
 const _id = require('mongodb').ObjectId;
 
 const applicationsController = {
