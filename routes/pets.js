@@ -45,3 +45,6 @@ router.delete('/pets/:id', (req, res) => {
     petsController.deletePet(req, res);
 });
 
+module.exports = router;
+
+
