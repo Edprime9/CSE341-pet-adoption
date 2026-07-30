@@ -11,11 +11,15 @@ const routers = require('./routes/pets');
 
 //Modular settings
 const { connectDB } = require('./config/db');
+const { setupSwagger } = require('./config/swagger');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 const routes = require('./routes');
+
+//Initialize documentation modules
+setupSwagger(app);
 
 app.use(cors());
 app.use(express.json());
