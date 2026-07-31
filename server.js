@@ -15,6 +15,7 @@ const { setupSwagger } = require('./config/swagger');
 
 //Routes objects
 const petRoutes = require('./routes/petRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -31,6 +32,7 @@ setupSwagger(app);
 
 //Application endpoint mappings
 app.use('/pets', petRoutes);
+app.use('/applications', applicationRoutes);
 
 app.get('/', (req,res) => {
     res.status(200).json({
