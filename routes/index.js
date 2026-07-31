@@ -5,6 +5,5 @@ const sheltersRouter = require('./shelters');
 
 router.use('/', petsRouter);
 router.use('/', applicationsRouter);
-router.use('/shelters', sheltersRouter);
 
 module.exports = router;

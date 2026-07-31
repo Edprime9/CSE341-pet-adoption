@@ -8,6 +8,7 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const routers = require('./routes/pets');
+const shelterRoutes = require("./routes/shelters");
 
 //Modular settings
 const { connectDB } = require('./config/db');
@@ -23,6 +24,7 @@ setupSwagger(app);
 
 app.use(cors());
 app.use(express.json());
+app.use("/shelters", shelterRoutes);
 
 app.use('/', routes);
 
