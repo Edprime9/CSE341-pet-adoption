@@ -5,6 +5,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 //load external document files
 const applicationsDocs = require('../docs/applications.json');
 const petDocs = require('../docs/pets.json');
+const sheltersDocs = require("../docs/shelters.json");
 
 const swaggerOptions = {
   definition: {
@@ -33,11 +34,13 @@ const swaggerOptions = {
     // Tell Swagger to inject your clean JSON path definitions here
     paths: {
       ...petDocs,
-      ...applicationsDocs 
+      ...applicationsDocs,
+      ...sheltersDocs
     }
   },
   // We can leave this empty since paths are manually loaded via JSON modules above
-  apis: [], 
+  // apis: [], 
+  apis: []
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);

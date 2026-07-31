@@ -23,8 +23,8 @@ const applicationValidationRules = [
     body('adopter_id').isMongoId().withMessage('adopter_id must be a valid Mongo ID'),
     body('pet_id').isMongoId().withMessage('pet_id must be a valid Mongo ID'),
     body('shelter_id').isMongoId().withMessage('shelter_id must be a valid Mongo ID'),
-    body('status').isIn(['Pending', 'Approved', 'Rejected']).withMessage('status must be Pending, Approved, or Rejected'),
-    body('application_date').isISO8601().withMessage('application_date must be a valid ISO8601 date'),
+    body('status').isIn(['Pending', 'Approved', 'Rejected', 'pending', 'approved', 'rejected']).withMessage('status must be pending, approved, or rejected'),
+    body('submission_date').isISO8601().withMessage('submission_date must be a valid ISO8601 date'),
     body('notes').optional().isString().withMessage('notes must be a string')
 ];
 
@@ -32,8 +32,8 @@ const applicationUpdateValidationRules = [
     body('adopter_id').optional().isMongoId().withMessage('adopter_id must be a valid Mongo ID'),
     body('pet_id').optional().isMongoId().withMessage('pet_id must be a valid Mongo ID'),
     body('shelter_id').optional().isMongoId().withMessage('shelter_id must be a valid Mongo ID'),
-    body('status').optional().isIn(['Pending', 'Approved', 'Rejected']).withMessage('status must be Pending, Approved, or Rejected'),
-    body('application_date').optional().isISO8601().withMessage('application_date must be a valid ISO8601 date'),
+    body('status').optional().isIn(['Pending', 'Approved', 'Rejected', 'pending', 'approved', 'rejected']).withMessage('status must be pending, approved, or rejected'),
+    body('submission_date').optional().isISO8601().withMessage('submission_date must be a valid ISO8601 date'),
     body('notes').optional().isString().withMessage('notes must be a string')
 ];
 
