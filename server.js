@@ -10,21 +10,23 @@ const session = require('express-session');
 const routers = require('./routes/pets');
 
 //Modular settings
-const { connectDB } = require('./models/db/db');
+const { connectDB } = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const routes = require('./routes');
+
 app.use(cors());
-app.use(routers);
+app.use(express.json());
+
+app.use('/', routes);
 
 app.get('/', (req,res) => {
     res.status(200).json({
         status: "Success",
         message: "Welcome to the Pet Adoption API!",
-        documentation: "Use http://localhost:8080/api-docs to access the documentation for this API." 
+        documentation: "Use http://localhost:8080/api-docs to access the documentation for this API.(not done yet, wait for confirmation from repo owner)" 
     })
 });
 
