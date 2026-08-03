@@ -14,10 +14,17 @@ const shelterRoutes = require("./routes/shelters");
 const { connectDB } = require('./config/db');
 const { setupSwagger } = require('./config/swagger');
 
+//Routes objects
+const petRoutes = require('./routes/petRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-const routes = require('./routes');
+//const routes = require('./routes');
+
+app.use(cors());
+app.use(express.json());
 
 //Initialize documentation modules
 setupSwagger(app);
@@ -26,13 +33,15 @@ app.use(cors());
 app.use(express.json());
 app.use("/shelters", shelterRoutes);
 
-app.use('/', routes);
+//Application endpoint mappings
+app.use('/pets', petRoutes);
+app.use('/applications', applicationRoutes);
 
 app.get('/', (req,res) => {
     res.status(200).json({
         status: "Success",
         message: "Welcome to the Pet Adoption API!",
-        documentation: "Use http://localhost:8080/api-docs to access the documentation for this API.(not done yet, wait for confirmation from repo owner)" 
+        documentation: "type /api-docs after the root url to access the documentation for this API." 
     })
 });
 
