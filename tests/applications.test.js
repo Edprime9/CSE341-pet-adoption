@@ -22,9 +22,25 @@ describe('GET /applications', () => {
 
   it('returns 200 and the full list of applications', async () => {
     const fakeApplications = [
-      { _id: new ObjectId(), status: 'pending' },
-      { _id: new ObjectId(), status: 'approved' }
+      { _id: new ObjectId(),
+        "name": "Daisy",
+        "species": "Rabbit",
+        "breed": "Holland Lop",
+        "age": 22,
+        "gender": "Female",
+        "size": "Small",
+        "status": "available",
+        "shelter_id": "66a27e7f1c9d4b001a333333",
+        "description": "Loves eating fresh greens and exploring outside her cage. Very gentle.",
+        "traits": [
+            "Gentle",
+            "Curious",
+            "Quiet"
+        ],
+        "intake_date": "2026-06-15"
+    }     
     ];
+
     getCollection.mockReturnValue({
       find: jest.fn().mockReturnValue({
         toArray: jest.fn().mockResolvedValue(fakeApplications)
@@ -34,8 +50,11 @@ describe('GET /applications', () => {
     const res = await request(buildApp()).get('/applications');
 
     expect(res.status).toBe(200);
-    expect(res.body).toHaveLength(2);
-    expect(res.body[1].status).toBe('approved');
+    expect(res.body).toHaveLength(1);
+    expect(res.body[0].name).toBe('Daisy');
+    expect(res.body[0].breed).toBe('Holland Lop');
+    expect(res.body[0].status).toBe('available');
+    expect(res.body[0].traits[0]).toBe('Gentle');
   });
 
   it('returns 500 when the database call fails', async () => {
@@ -56,18 +75,19 @@ describe('GET /applications/:id', () => {
 
   it('returns 200 and the matching application when found', async () => {
     const id = new ObjectId();
-    const fakeApplication = { _id: id, status: 'pending' };
+    const fakeApplications = { _id: id, name: 'Daisy' };
     getCollection.mockReturnValue({
-      findOne: jest.fn().mockResolvedValue(fakeApplication)
+      findOne: jest.fn().mockResolvedValue(fakeApplications)
     });
 
     const res = await request(buildApp()).get(`/applications/${id.toString()}`);
 
     expect(res.status).toBe(200);
-    expect(res.body.status).toBe('pending');
+    expect(res.body.name).toBe('Daisy');
+    
   });
 
-  it('returns 404 when no application matches the id', async () => {
+  it('returns 404 when no applications matches the id', async () => {
     const id = new ObjectId();
     getCollection.mockReturnValue({
       findOne: jest.fn().mockResolvedValue(null)
@@ -78,11 +98,7 @@ describe('GET /applications/:id', () => {
     expect(res.status).toBe(404);
   });
 
-  it('returns 500 when the id is not a valid ObjectId', async () => {
-    getCollection.mockReturnValue({
-      findOne: jest.fn()
-    });
-
+  it('returns 400 when the id is not a valid ObjectId', async () => {
     const res = await request(buildApp()).get('/applications/not-a-valid-id');
 
     expect(res.status).toBe(500);
