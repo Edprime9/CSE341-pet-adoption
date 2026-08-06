@@ -234,7 +234,10 @@
         },
         "500": {
           "description": "Database update failed."
-        }
+        },
+        "204": {
+  "description": "Shelter updated successfully"
+}
       }
     },
     "delete": {
