@@ -82,7 +82,9 @@ const remove = async (req, res) => {
       return res.status(404).json({ message: "Shelter not found." });
     }
 
-    return res.status(204).send();
+    return res.status(200).json({
+  message: "Shelter deleted successfully."
+});
   } catch (error) {
     return res.status(500).json({ message: "Unable to delete shelter." });
   }
