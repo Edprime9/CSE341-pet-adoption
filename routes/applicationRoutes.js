@@ -2,6 +2,8 @@ const express = require('express');
 const { ObjectId } = require('mongodb');
 const { getCollection } = require('../config/db');
 const { requireAuth } = require('../middleware/requireAuth');
+const { applicationValidationRules } = require('../middleware/applicationValidationRules');
+const { validatePayload } = require ('../middleware/validate');
 const router = express.Router();
 
 // Endpoint: Get. Get all records
@@ -38,7 +40,11 @@ router.get('/:id', async(req,res) => {
 });
 
 //Endpoint: POST. Create a new record
-router.post('/', requireAuth,async(req,res) => { 
+router.post('/',
+    requireAuth,
+    applicationValidationRules,
+    validatePayload,
+    async(req,res) => { 
     try{
         //grab all the info
         const application = req.body;
@@ -61,7 +67,11 @@ router.post('/', requireAuth,async(req,res) => {
 });
 
 //Endpoint: PUT. Update a record by id
-router.put('/:id', requireAuth,async(req,res) => {
+router.put('/:id',
+    requireAuth,
+    applicationValidationRules,
+    validatePayload,
+    async(req,res) => {
     //grab the id from the body
     const { id } = req.params;
     try{
