@@ -3,8 +3,8 @@ const { ObjectId } = require('mongodb');
 const{ getCollection } = require('../config/db');
 const router = express.Router();
 const { requireAuth } = require('../middleware/requireAuth');
-//const { bookValidationRules } = require('../middleware/bookValidationRules');
-//const { validatePayload } = require('../middleware/validate');
+const { petValidationRules } = require('../middleware/petValidationRules');
+const { validatePayload } = require('../middleware/validate');
 
 /*****************************************************************
  * ********************   GET ROUTES   ***************************
@@ -47,7 +47,11 @@ router.get('/:id', async (req, res) => {
 });
 
 //End point POST: Create a new pet document in the collection
-router.post('/', requireAuth, async(req,res) => {
+router.post('/',
+    requireAuth,
+    petValidationRules,
+    validatePayload,
+    async(req,res) => {
     try{
         //calls the pets collection
         const petsCollection = getCollection('pets');
@@ -66,7 +70,11 @@ router.post('/', requireAuth, async(req,res) => {
 });
 
 //Endpoint: PUT. Update an existing record
-router.put('/:id', requireAuth, async(req,res) => {
+router.put('/:id',
+    requireAuth,
+    petValidationRules,
+    validatePayload,
+    async(req,res) => {
     const {id} = req.params;
     try{
         //call the collection
