@@ -63,7 +63,7 @@ const shelterValidationRules = [
     .notEmpty()
     .withMessage("Location postal code is required."),
 
-  body("phone").trim().notEmpty().withMessage("Phone is required."),
+  body("phone").trim().notEmpty().withMessage("Phone is required.").isMobilePhone().withMessage("Phone number format not valid(999-999-9999)"),
 
   body("email").trim().isEmail().withMessage("A valid email is required."),
 
