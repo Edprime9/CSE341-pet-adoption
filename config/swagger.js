@@ -24,6 +24,14 @@ const swaggerOptions = {
       {
         name: 'Applications',
         description: 'Operations and endpoints related to managing applications to adopt pets'
+      },
+      {
+        name: 'Shelters',
+        description: 'Operations and endpoints related to managing shelters'
+      },
+      {
+        name: 'Adopters',
+        description: 'Operations and endpoints related to managing information about people adopting pets'
       }
     ],
     servers: [
